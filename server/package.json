@@ -1,0 +1,20 @@
+{
+  "name": "reader-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch-path=index.js --watch-path=extractor.js --watch-path=aiTts.js index.js"
+  },
+  "dependencies": {
+    "@mozilla/readability": "^0.5.0",
+    "axios": "^1.7.9",
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "jsdom": "^26.0.0",
+    "msedge-tts": "^2.1.1"
+  }
+}
