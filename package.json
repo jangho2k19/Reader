@@ -5,10 +5,19 @@
   "type": "module",
   "main": "server/index.js",
   "scripts": {
-    "build": "npm install --prefix server && npm install --prefix client && npm run build --prefix client",
     "start": "node server/index.js",
-    "dev": "node start.js",
-    "install:all": "npm install && npm install --prefix server && npm install --prefix client"
+    "build": "npm --prefix client install && npm --prefix client run build",
+    "postinstall": "npm --prefix client install && npm --prefix client run build",
+    "dev": "node start.js"
+  },
+  "dependencies": {
+    "@mozilla/readability": "^0.5.0",
+    "axios": "^1.7.9",
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "jsdom": "^26.0.0",
+    "msedge-tts": "^2.1.1"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"
