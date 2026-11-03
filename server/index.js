@@ -1,5 +1,8 @@
 import express from 'express';
 import cors from 'cors';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { extractArticle, processRawText } from './extractor.js';
 import {
   synthesizeAiAudio,
@@ -9,6 +12,9 @@ import {
   GEMINI_VOICES,
   TIKTOK_VOICES
 } from './aiTts.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -153,6 +159,18 @@ app.post('/api/tts/synthesize', async (req, res) => {
 });
 
 
-app.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
+// Serve static frontend assets from client/dist in production
+const clientDistPath = path.join(__dirname, '../client/dist');
+if (fs.existsSync(clientDistPath)) {
+  app.use(express.static(clientDistPath));
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) {
+      return next();
+    }
+    res.sendFile(path.join(clientDistPath, 'index.html'));
+  });
+}
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server listening on http://0.0.0.0:${PORT}`);
 });

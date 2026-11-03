@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "main": "server/index.js",
   "scripts": {
-    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
-    "start": "node start.js",
+    "build": "npm install --prefix server && npm install --prefix client && npm run build --prefix client",
+    "start": "node server/index.js",
+    "dev": "node start.js",
     "install:all": "npm install && npm install --prefix server && npm install --prefix client"
   },
   "devDependencies": {
