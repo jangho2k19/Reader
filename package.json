@@ -6,8 +6,7 @@
   "main": "server/index.js",
   "scripts": {
     "start": "node server/index.js",
-    "build": "npm --prefix client install && npm --prefix client run build",
-    "postinstall": "npm --prefix client install && npm --prefix client run build",
+    "build": "npm install && npm --prefix client install && npm --prefix client run build",
     "dev": "node start.js"
   },
   "dependencies": {
